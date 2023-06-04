@@ -1,33 +1,47 @@
 # go-sample
 
-## setup
-
-### コンテナを起動状態で作成
-
-8000でバインディング
+## go get
 
 ```
-docker run --name hello -d -p 8000:8080 go-sample-image
+go get xorm.io/xorm github.com/go-sql-driver/mysql
 ```
 
-### コンテナの一覧を表示
+## docker-compose
 
-停止中のコンテナも含めて表示
-
-```
-docker ps -a
-```
-
-### コンテナの停止
-
-<CONTAINER ID>は、`docker ps -a` で確認可能
+起動
 
 ```
-docker stop <CONTAINER ID>
+docker-compose up -d
 ```
 
-### APIの動作確認
+停止
 
 ```
-curl http://localhost:8000/hello
+docker-compose down
+```
+
+## APIの動作確認
+
+POST
+
+```
+curl -X POST "http://localhost:3000/v1/users" -H "Content-Type: application/json" -d '{"name": "鈴木", "address": "東京都"}'
+```
+
+GET
+
+```
+curl -X GET "http://localhost:3000/v1/users/1"
+```
+
+PUT
+
+```
+curl -X PUT -H "Content-Type: application/json" -d '{"name": "鈴木", "address": "神奈川県"}' "http://localhost:3000/v1/users/1"
+```
+
+DELETE
+
+```
+curl -X DELETE "http://localhost:3000/v1/users/1"
 ```
